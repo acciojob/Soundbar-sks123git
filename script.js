@@ -1,25 +1,21 @@
-const btns = document.querySelectorAll(".btn");
+const buttons = document.querySelectorAll(".btn");
 const stopBtn = document.querySelector(".stop");
 
-let currentAudio = null;
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll("audio").forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
 
-btns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-
-        const sound = btn.dataset.sound;
-
-        currentAudio = new Audio(`sounds/${sound}.mp3`);
-        currentAudio.play();
+        const audio = document.getElementById(button.dataset.sound);
+        audio.play();
     });
 });
 
 stopBtn.addEventListener("click", () => {
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-    }
+    document.querySelectorAll("audio").forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
 });
